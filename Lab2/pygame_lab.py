@@ -112,13 +112,18 @@ class Wheel:
 
 if __name__ == '__main__':
     '''Main method'''
-    
+    FPS = 30
     # ============= Window and Draw ==================
+    pygame.init()
+    bg = pygame.Surface(screen.get_size())
+    bg.fill((255, 255, 255))
+    bg.convert()
     clock = pygame.time.Clock()
+    milliseconds = clock.tick(FPS)
+    screen.fill(WHITE)
+    screen.blit(bg, (0,0))
     while True:
-
-        clock.tick(60)
-
+        screen.blit(bg, (0,0))
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -128,18 +133,16 @@ if __name__ == '__main__':
                     pygame.quit()
                     exit()
 
-
-
         # update stuff
-        screen.fill(WHITE)
+        
         w = Wheel(100, x=screen_center[0], y=screen_center[1])
 
         for i in range(len(w.points)):
             w.points[i].vecprod(rotation_matrix(4))
-
+            
             w.draw()
 
             # drawining stuff
-
+        
 
         pygame.display.update()

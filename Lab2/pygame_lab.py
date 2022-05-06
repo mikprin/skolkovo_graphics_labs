@@ -140,6 +140,9 @@ if __name__ == '__main__':
     milliseconds = clock.tick(FPS)
     screen.fill(WHITE)
     screen.blit(bg, (0,0))
+    
+    w = Wheel(100, x=screen_center[0], y=screen_center[1])
+    
     while True:
         screen.blit(bg, (0,0))
         for event in pygame.event.get():
@@ -153,7 +156,7 @@ if __name__ == '__main__':
 
         # update stuff
         
-        w = Wheel(100, x=screen_center[0], y=screen_center[1])
+        
 
         # for i in range(len(w.points)):
         #     w.points[i].vecprod(rotation_matrix(4))
@@ -161,7 +164,7 @@ if __name__ == '__main__':
         #     w.draw()
 
         # w.translate_2_origin()
-        # w.translate(100,0)
+        w.translate(0.01,0)
         w.draw()
 
 

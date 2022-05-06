@@ -98,7 +98,7 @@ class Wheel:
         self.cirle_points.append( Point(self.center.x, self.center.y - self.radius ))
         self.cirle_points.append( Point(self.center.x - self.diag_coef, self.center.y - self.diag_coef))
         self.cirle_points.append( Point(self.center.x - self.radius, self.center.y ))
-        self.cirle_points.append( Point( - self.center.x - self.diag_coef, - self.center.y - self.diag_coef ))
+        #self.cirle_points.append( Point( - self.center.x - self.diag_coef, - self.center.y - self.diag_coef ))
         
         self.points = list(self.cirle_points)
         
@@ -130,23 +130,16 @@ if __name__ == '__main__':
 
 
 
-    # update stuff
-    screen.fill(WHITE)
-    Wee = Wheel(100, x=screen_center[0], y=screen_center[1])
+        # update stuff
+        screen.fill(WHITE)
+        w = Wheel(100, x=screen_center[0], y=screen_center[1])
 
-    for i in range(len(Wee.points)):
-        Wee.points[i].vecprod(rotation_matrix(4))
+        for i in range(len(w.points)):
+            w.points[i].vecprod(rotation_matrix(4))
 
-        Wee.draw()
+            w.draw()
 
-        # drawining stuff
-
-
+            # drawining stuff
 
 
-
-<<<<<<< HEAD
         pygame.display.update()
-=======
-    pygame.display.update()
->>>>>>> 0e1869ab0ff37779535862e3182b8de090172d46

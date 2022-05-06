@@ -60,14 +60,12 @@ def rotation_matrix(angle):
     return rotation_matrix
 
 
-def translation_matrix(tx,ty):
+def translation_matrix(tx, ty):
     translation_matrix = np.matrix([
         [1, 0, tx],
         [0, 1, ty],
         [0, 0, 1]])
-
     return translation_matrix
-
 
 # ============= Functions ==================
 def drawline(point1, point2):
@@ -83,7 +81,7 @@ class Point():
         self.vec = np.matrix([[x], [y], [1]])
         self.x = self.vec[0, 0]
         self.y = self.vec[1, 0]
-        
+
     # def __add__(self, other_point):
 
     def vecprod(self, matrix):
@@ -100,7 +98,7 @@ class Wheel:
         self.diag_coef = radius/np.sqrt(2)
         self.color = color
 
-        self.center = Point(x, y)        
+        self.center = Point(x, y)
         self.cirle_points = []
         self.cirle_points.append( Point(self.center.x, self.center.y + self.radius ))
         self.cirle_points.append( Point(self.center.x + self.diag_coef, self.center.y + self.diag_coef))
@@ -110,11 +108,19 @@ class Wheel:
         self.cirle_points.append( Point(self.center.x - self.diag_coef, self.center.y - self.diag_coef))
         self.cirle_points.append( Point(self.center.x - self.radius, self.center.y ))
         #self.cirle_points.append( Point( - self.center.x - self.diag_coef, - self.center.y - self.diag_coef ))
-        
+
         self.points = list(self.cirle_points)
-        
+
         #self.cirle_points.append(  )
 
+    def translate_2_origin(self,):
+        for i in range(len(self.points)):
+            self.points[i].vecprod(
+                translation_matrix(-self.center.x, -self.center.y))
+
+    def translate(self,tx,ty):
+        for i in range(len(self.points)):
+            self.points[i].vecprod(translation_matrix(tx,ty))
 
     def draw(self):
         for i in range(len(self.cirle_points)):
@@ -123,7 +129,7 @@ class Wheel:
 
 if __name__ == '__main__':
     '''Main method'''
-    
+
     # ============= Window and Draw ==================
     clock = pygame.time.Clock()
     while True:
@@ -145,10 +151,9 @@ if __name__ == '__main__':
         screen.fill(WHITE)
         w = Wheel(100, x=screen_center[0], y=screen_center[1])
 
-        for i in range(len(w.points)):
-            w.points[i].vecprod(rotation_matrix(4))
-
-            w.draw()
+        # w.translate_2_origin()
+        # w.translate(100,0)
+        w.draw()
 
             # drawining stuff
 

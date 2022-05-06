@@ -2,7 +2,35 @@
 from re import X
 import pygame
 import numpy as np
+from pynput import keyboard  # using module keyboard
 # from math import *
+
+direction = 0
+
+def on_press(key):
+    global direction
+    try:
+        print('alphanumeric key {0} pressed'.format(
+            key.char))
+        if key.char == "a":
+            direction = 0
+        elif key.char == "d":
+            direction = 1
+        elif key.char == "w":
+            direction = 2
+        elif key.char == "s":
+            direction = 3
+    except AttributeError:
+        print('special key {0} pressed'.format(
+            key))
+
+def on_release(key):
+    print('{0} released'.format(
+        key))
+    if key == keyboard.Key.esc:
+        # Stop listener
+        return False
+
 
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
@@ -142,7 +170,19 @@ class Wheel:
 
 if __name__ == '__main__':
     '''Main method'''
+
+
+    # Keyboard:
+    # Collect events until released
+    listener = keyboard.Listener(
+        on_press=on_press,
+        on_release=on_release)
+    listener.start()
+
     FPS = 30
+
+    translation = (0.01,0)
+    rotation = 0.001
 
     # ============= Window and Draw ==================
     pygame.init()
@@ -169,12 +209,26 @@ if __name__ == '__main__':
 
         # update stuff
 
-        w.translate(0.1,0)
-        w.rotate(0.001)
+        w.translate(*translation)
+        w.rotate(rotation)
         # w.translate(0.1, 0)
 
         w.draw()
-
+        #print(f"Direction = {direction}")
+        if direction == 0:
+            translation = (-0.2,0)
+        if direction == 1:
+            translation = (0.2,0)
+        if direction == 2:
+            translation = (0,-0.2)
+        if direction == 3:
+            translation = (0.0,0.2)
+        # if keyboard.is_pressed('a'):  # if key 'q' is pressed
+        #     translation = (-0.1,0)
+        #     print('Input A')
+        # if keyboard.is_pressed('d'):  # if key 'q' is pressed
+        #     translation = (0.1,0)
+        #     print('Input D')
 
 
         pygame.display.update()

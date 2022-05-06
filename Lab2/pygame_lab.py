@@ -14,8 +14,12 @@ def on_press(key):
             key.char))
         if key.char == "a":
             direction = 0
-        else:
+        elif key.char == "d":
             direction = 1
+        elif key.char == "w":
+            direction = 2
+        elif key.char == "s":
+            direction = 3
     except AttributeError:
         print('special key {0} pressed'.format(
             key))
@@ -213,9 +217,12 @@ if __name__ == '__main__':
         #print(f"Direction = {direction}")
         if direction == 0:
             translation = (-0.2,0)
-        else:
+        if direction == 1:
             translation = (0.2,0)
-            
+        if direction == 2:
+            translation = (0,-0.2)
+        if direction == 3:
+            translation = (0.0,0.2)
         # if keyboard.is_pressed('a'):  # if key 'q' is pressed 
         #     translation = (-0.1,0)
         #     print('Input A')

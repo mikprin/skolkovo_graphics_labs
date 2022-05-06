@@ -40,11 +40,11 @@ p2 = np.matrix([1, -1, 1])
 #     [-np.sin(angle), 0, np.cos(angle)],
 # ])
 
-# rotation_x = np.matrix([
+# matrix = np.matrix([
 #     [1, 0, 0],
-#     [0, np.cos(angle), -np.sin(angle)],
-#     [0, np.sin(angle), np.cos(angle)],
-# ])
+#     [0, 1, 0],
+#     [0, 0, 1]])
+
 projection_matrix = np.matrix([
     [1, 0, 0],
     [0, 1, 0]
@@ -58,6 +58,17 @@ def rotation_matrix(angle):
         [0, 0, 1]])
 
     return rotation_matrix
+
+
+def translation_matrix(tx,ty):
+    translation_matrix = np.matrix([
+        [1, 0, tx],
+        [0, 1, ty],
+        [0, 0, 1]])
+
+    return translation_matrix
+
+
 # ============= Functions ==================
 def drawline(point1, point2):
     # tuple1 = (point1.vec[0, 0], point1.vec[1, 0])

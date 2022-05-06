@@ -118,9 +118,13 @@ class Wheel:
             self.points[i].vecprod(
                 translation_matrix(-self.center.x, -self.center.y))
 
-    def translate(self,tx,ty):
+    def translate(self, tx, ty):
         for i in range(len(self.points)):
             self.points[i].vecprod(translation_matrix(tx,ty))
+
+    def rotate(self, angle):
+        self.translate_2_origin()
+        
 
     def draw(self):
         for i in range(len(self.cirle_points)):

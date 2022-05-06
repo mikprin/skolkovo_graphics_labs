@@ -169,8 +169,8 @@ if __name__ == '__main__':
 
         # update stuff
 
-        w.translate(0.5,0)
-        # w.rotate(0.001)
+        w.translate(0.1,0)
+        w.rotate(0.001)
         # w.translate(0.1, 0)
 
         w.draw()

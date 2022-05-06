@@ -110,6 +110,7 @@ class Wheel:
         #self.cirle_points.append( Point( - self.center.x - self.diag_coef, - self.center.y - self.diag_coef ))
 
         self.points = list(self.cirle_points)
+        self.points.append(self.center)
 
         #self.cirle_points.append(  )
 

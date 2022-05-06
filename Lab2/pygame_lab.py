@@ -33,11 +33,6 @@ p2 = np.matrix([1, -1, 1])
 
 # ============= Matrices ==================
 
-# rotation_z = np.matrix([
-#     [np.cos(angle), -np.sin(angle), 0],
-#     [np.sin(angle), np.cos(angle), 0],
-#     [0, 0, 1],
-# ])
 
 # rotation_y = np.matrix([
 #     [np.cos(angle), 0, np.sin(angle)],
@@ -55,13 +50,20 @@ projection_matrix = np.matrix([
     [0, 1, 0]
 ])
 
+
+def rotation_matrix(angle):
+    rotation_matrix = np.matrix([
+        [np.cos(angle), -np.sin(angle), 0],
+        [np.sin(angle), np.cos(angle), 0],
+        [0, 0, 1]])
+
+    return rotation_matrix
 # ============= Functions ==================
 def drawline(point1, point2):
     # tuple1 = (point1.vec[0, 0], point1.vec[1, 0])
     # tuple2 = (point2.vec[0, 0], point2.vec[1, 0])
     pygame.draw.line(screen, BLACK, (point1.x,
                         point1.y), (point2.x, point2.y), width = 4)
-
 
 
 # ============= Classes ==================
@@ -126,9 +128,15 @@ if __name__ == '__main__':
                     pygame.quit()
                     exit()
 
-        # update stuff
-        screen.fill(WHITE)
-        Wee = Wheel(100, x=screen_center[0], y=screen_center[1])
+
+
+    # update stuff
+    screen.fill(WHITE)
+    Wee = Wheel(100, x=screen_center[0], y=screen_center[1])
+
+    for i in range(len(Wee.points)):
+        Wee.points[i].vecprod(rotation_matrix(4))
+
         Wee.draw()
 
         # drawining stuff
@@ -137,4 +145,8 @@ if __name__ == '__main__':
 
 
 
+<<<<<<< HEAD
         pygame.display.update()
+=======
+    pygame.display.update()
+>>>>>>> 0e1869ab0ff37779535862e3182b8de090172d46

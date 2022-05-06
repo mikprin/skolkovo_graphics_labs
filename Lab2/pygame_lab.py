@@ -31,7 +31,7 @@ def on_release(key):
         # Stop listener
         return False
 
-    
+
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
@@ -170,20 +170,20 @@ class Wheel:
 
 if __name__ == '__main__':
     '''Main method'''
-    
-    
+
+
     # Keyboard:
     # Collect events until released
     listener = keyboard.Listener(
         on_press=on_press,
         on_release=on_release)
     listener.start()
-    
+
     FPS = 30
 
     translation = (0.01,0)
     rotation = 0.001
-    
+
     # ============= Window and Draw ==================
     pygame.init()
     bg = pygame.Surface(screen.get_size())
@@ -227,10 +227,11 @@ if __name__ == '__main__':
         if direction == 3:
             translation = (0.0,0.2)
             rotation = 0
-        # if keyboard.is_pressed('a'):  # if key 'q' is pressed 
+
+        # if keyboard.is_pressed('a'):  # if key 'q' is pressed
         #     translation = (-0.1,0)
         #     print('Input A')
-        # if keyboard.is_pressed('d'):  # if key 'q' is pressed 
+        # if keyboard.is_pressed('d'):  # if key 'q' is pressed
         #     translation = (0.1,0)
         #     print('Input D')
 

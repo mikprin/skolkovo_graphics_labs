@@ -70,6 +70,8 @@ class Point():
         self.vec = np.matrix([[x], [y], [1]])
         self.x = self.vec[0, 0]
         self.y = self.vec[1, 0]
+        
+    # def __add__(self, other_point):
 
     def vecprod(self, matrix):
         self.vec = matrix @ self.vec
@@ -85,50 +87,54 @@ class Wheel:
         self.diag_coef = radius/np.sqrt(2)
         self.color = color
 
-        self.center = Point(x, y)
-
-        p1 = Point(self.center.x, self.center.y+self.radius)
-        p2 = Point(self.center.x+self.diag_coef, self.center.y+self.diag_coef)
-        p3 = Point(self.center.x+self.radius, self.center.y)
-        p4 = Point(self.center.x+self.diag_coef, self.center.y-self.diag_coef)
-        p5 = Point(self.center.x, self.center.y-self.radius)
-        p6 = Point(self.center.x-self.diag_coef, self.center.y-self.diag_coef)
-        p7 = Point(self.center.x-self.radius, self.center.y)
-
-
-
-        self.points = [p1,p2,p3,p4,p5,p6,p7]
+        self.center = Point(x, y)        
+        self.cirle_points = []
+        self.cirle_points.append( Point(self.center.x, self.center.y + self.radius ))
+        self.cirle_points.append( Point(self.center.x + self.diag_coef, self.center.y + self.diag_coef))
+        self.cirle_points.append( Point(self.center.x + self.radius, self.center.y ))
+        self.cirle_points.append( Point(self.center.x + self.diag_coef, self.center.y - self.diag_coef))
+        self.cirle_points.append( Point(self.center.x, self.center.y - self.radius ))
+        self.cirle_points.append( Point(self.center.x - self.diag_coef, self.center.y - self.diag_coef))
+        self.cirle_points.append( Point(self.center.x - self.radius, self.center.y ))
+        self.cirle_points.append( Point( - self.center.x - self.diag_coef, - self.center.y - self.diag_coef ))
+        
+        self.points = list(self.cirle_points)
+        
+        #self.cirle_points.append(  )
 
 
     def draw(self):
-        n = len(self.points)
-        for i in range(n):
-            drawline(self.points[i], (self.points[(i+1) % n]) )
+        for i in range(len(self.cirle_points)):
+            drawline(self.points[i], (self.points[(i+1) % len(self.cirle_points)]) )
 
-# ============= Window and Draw ==================
-clock = pygame.time.Clock()
-while True:
 
-    clock.tick(60)
+if __name__ == '__main__':
+    '''Main method'''
+    
+    # ============= Window and Draw ==================
+    clock = pygame.time.Clock()
+    while True:
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
+        clock.tick(60)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    exit()
 
-    # update stuff
-    screen.fill(WHITE)
-    Wee = Wheel(100, x=screen_center[0], y=screen_center[1])
-    Wee.draw()
+        # update stuff
+        screen.fill(WHITE)
+        Wee = Wheel(100, x=screen_center[0], y=screen_center[1])
+        Wee.draw()
 
-    # drawining stuff
-
-
+        # drawining stuff
 
 
 
-    pygame.display.update()
+
+
+        pygame.display.update()

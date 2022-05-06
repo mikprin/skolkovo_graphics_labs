@@ -123,8 +123,13 @@ class Wheel:
             self.points[i].vecprod(translation_matrix(tx,ty))
 
     def rotate(self, angle):
+        cx, cy = self.center.x, self.center.y
         self.translate_2_origin()
-        
+        for i in range(len(self.points)):
+            self.points[i].vecprod(rotation_matrix(angle))
+        self.translate(cx, cy)
+
+
 
     def draw(self):
         for i in range(len(self.cirle_points)):
@@ -144,9 +149,9 @@ if __name__ == '__main__':
     milliseconds = clock.tick(FPS)
     screen.fill(WHITE)
     screen.blit(bg, (0,0))
-    
+
     w = Wheel(100, x=screen_center[0], y=screen_center[1])
-    
+
     while True:
         screen.blit(bg, (0,0))
         for event in pygame.event.get():
@@ -159,20 +164,13 @@ if __name__ == '__main__':
                     exit()
 
         # update stuff
-        
-        
 
-        # for i in range(len(w.points)):
-        #     w.points[i].vecprod(rotation_matrix(4))
-            
-        #     w.draw()
+        w.translate(0.1,0)
+        w.rotate(0.001)
+        # w.translate(0.1, 0)
 
-        # w.translate_2_origin()
-        w.translate(0.01,0)
         w.draw()
 
 
-            # drawining stuff
-        
 
         pygame.display.update()

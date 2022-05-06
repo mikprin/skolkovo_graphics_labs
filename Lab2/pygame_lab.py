@@ -117,10 +117,12 @@ class Wheel:
         for i in range(len(self.points)):
             self.points[i].vecprod(
                 translation_matrix(-self.center.x, -self.center.y))
+        return self
 
     def translate(self, tx, ty):
         for i in range(len(self.points)):
             self.points[i].vecprod(translation_matrix(tx,ty))
+        return self
 
     def rotate(self, angle):
         cx, cy = self.center.x, self.center.y
@@ -128,6 +130,7 @@ class Wheel:
         for i in range(len(self.points)):
             self.points[i].vecprod(rotation_matrix(angle))
         self.translate(cx, cy)
+        return self
 
 
 
@@ -165,8 +168,8 @@ if __name__ == '__main__':
 
         # update stuff
 
-        w.translate(0.1,0)
-        w.rotate(0.001)
+        w.translate(0.5,0)
+        # w.rotate(0.001)
         # w.translate(0.1, 0)
 
         w.draw()

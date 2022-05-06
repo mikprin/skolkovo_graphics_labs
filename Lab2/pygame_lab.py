@@ -228,12 +228,6 @@ if __name__ == '__main__':
             translation = (0.0,0.2)
             rotation = 0
 
-        # if keyboard.is_pressed('a'):  # if key 'q' is pressed
-        #     translation = (-0.1,0)
-        #     print('Input A')
-        # if keyboard.is_pressed('d'):  # if key 'q' is pressed
-        #     translation = (0.1,0)
-        #     print('Input D')
 
 
         pygame.display.update()
